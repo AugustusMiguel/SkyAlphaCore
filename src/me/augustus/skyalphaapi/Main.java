@@ -31,8 +31,4 @@ public class Main extends JavaPlugin {
     public static Main getPlugin() {
         return getPlugin(Main.class);
     }
-
-    void test() {
-        
-    }
 }

@@ -1,0 +1,8 @@
+main: me.augustus.skyalphaapi.Main
+name: SkyAlphaAPI
+version: 1.0
+author: Augustus
+
+commands:
+    logmode:
+    mysql:

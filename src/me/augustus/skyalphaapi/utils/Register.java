@@ -3,6 +3,7 @@ package me.augustus.skyalphaapi.utils;
 import me.augustus.skyalphaapi.Main;
 import me.augustus.skyalphaapi.commands.CommandLog;
 import me.augustus.skyalphaapi.commands.CommandMySQL;
+import me.augustus.skyalphaapi.commands.CommandProfile;
 import me.augustus.skyalphaapi.events.EventCommandPreProcess;
 import me.augustus.skyalphaapi.events.EventPlayerJoin;
 import me.augustus.skyalphaapi.tag.TAGCommand;
@@ -17,8 +18,9 @@ public class Register {
         //Commands
         command("logmode", new CommandLog());
         command("mysql", new CommandMySQL());
-        command("tag", new TAGCommand());
         command("xp", new XPCommands());
+        command("tag", new TAGCommand());
+        command("profile", new CommandProfile());
 
         //Events
         event(new EventPlayerJoin());

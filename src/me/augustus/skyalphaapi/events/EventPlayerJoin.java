@@ -2,8 +2,8 @@ package me.augustus.skyalphaapi.events;
 
 import me.augustus.skyalphaapi.mysql.MySQLMethods;
 import me.augustus.skyalphaapi.tag.TAGMethods;
-import me.augustus.skyalphaapi.tag.Tags;
 import me.augustus.skyalphaapi.utils.CoreMethods;
+import me.augustus.skyalphaapi.utils.PlayerInfo;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -22,7 +22,7 @@ public class EventPlayerJoin implements Listener {
             MySQLMethods.createPlayer(p);
 
         TAGMethods.updatePlayer(p);
+        PlayerInfo.createPlayerInConfig(p);
 
-            TAGMethods.setTag(p, Tags.owner);
     }
 }

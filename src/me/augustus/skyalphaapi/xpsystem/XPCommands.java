@@ -1,6 +1,5 @@
 package me.augustus.skyalphaapi.xpsystem;
 
-import me.augustus.skyalphaapi.mysql.MySQLMethods;
 import me.augustus.skyalphaapi.tag.TAGMethods;
 import me.augustus.skyalphaapi.tag.Tags;
 import me.augustus.skyalphaapi.utils.ActionBar;
@@ -13,9 +12,8 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
-import static me.augustus.skyalphaapi.xpsystem.XPMethods.xpprefix;
-
 public class XPCommands implements CommandExecutor {
+
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String lb, String[] args) {
@@ -24,37 +22,47 @@ public class XPCommands implements CommandExecutor {
 
         if (cmd.getName().equalsIgnoreCase("xp")) {
             if (args.length == 0) {
-                p.sendMessage(xpprefix + XPMethods.getXP(p).toString());
-                ActionBar ab = new ActionBar(XPMethods.xpprefix + "To next level §a" + XPMethods.nextLevel + "xp");
-                ab.sendToPlayer(p);
+                p.sendMessage(XPMethods.xpprefix + String.valueOf(XPMethods.getXp(p)));
+                ActionBar bar = new ActionBar(XPMethods.xpprefix + "XP to next level §a" + XPMethods.getXpToNextInt(p));
+                bar.sendToPlayer(p);
                 return true;
             }
 
-            if (args[0].equalsIgnoreCase("tops")) {
-                List<String> top = XPMethods.getTops();
+            if (args[0].equalsIgnoreCase("level")) {
+                p.sendMessage(XPMethods.xpprefix + String.valueOf(XPMethods.getCurrentLevel(p)));
+                return true;
+            }
+
+            if (args[0].equalsIgnoreCase("top")) {
+                List<String> tops = XPMethods.getXpTops();
                 p.sendMessage("§3§m---------------------§b§lTOP LIST§3§m-----------------------");
-                for (String messages : top) {
+                for (String messages : tops) {
                     p.sendMessage(messages);
                 }
                 p.sendMessage("§3§m-----------------------------------------------------");
+                return true;
             }
-            if (args[0].equalsIgnoreCase("pay")) {
-                Player t = Bukkit.getPlayer(args[1]);
-                if (MySQLMethods.existsPlayer(t)) {
-                    XPMethods.payXp(p, t, Integer.valueOf(args[2]));
-                }
-            }
-
 
             if (TAGMethods.getTag(p) < Tags.admin) {
                 p.sendMessage(CoreMethods.noperm);
                 return true;
             }
 
+            if (args.length < 3) {
+                p.sendMessage(XPMethods.xpprefix + "Use: §c/xp (set) (player) (new xp level)");
+            }
 
-
-
+            if (args[0].equalsIgnoreCase("set")) {
+                Player t = Bukkit.getPlayer(args[1]);
+                Integer xpLevel = Integer.valueOf(args[2]);
+                if (t == null) {
+                    p.sendMessage(XPMethods.xpprefix + "This player does not exist or is offline.");
+                    return true;
+                }
+                XPMethods.setXp(t, xpLevel);
+            }
         }
+
         return false;
     }
 }

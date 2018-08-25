@@ -52,7 +52,8 @@ public class MySQLMethods {
             PreparedStatement stm = null;
             try {
 
-                stm = con.prepareStatement("CREATE TABLE IF NOT EXISTS `playerdata`(`uuid` VARCHAR(36) NOT NULL, `name` VARCHAR(30) NOT NULL, `tag` TINYINT NOT NULL, `xp` MEDIUMINT NOT NULL)");
+                stm = con.prepareStatement("CREATE TABLE IF NOT EXISTS `playerdata`(`uuid` VARCHAR(36) NOT NULL, `name` VARCHAR(30) NOT NULL, `tag` TINYINT NOT NULL, `xp` " +
+                        "MEDIUMINT NOT NULL, `xplevel` SMALLINT NOT NULL)");
                  stm.executeUpdate();
                 cs.sendMessage(CoreMethods.mysqlprefix + "Table created with sucess.");
                 CoreMethods.sendOwnerMSG(CoreMethods.mysqlprefix + "Table created with sucess.");
@@ -80,11 +81,12 @@ public class MySQLMethods {
         PreparedStatement stm = null;
 
         try {
-            stm = con.prepareStatement("INSERT INTO `playerdata`(`uuid`, `name`, `tag`, `xp`) VALUES (?,?,?,?)");
+            stm = con.prepareStatement("INSERT INTO `playerdata`(`uuid`, `name`, `tag`, `xp`) VALUES (?,?,?,?,?)");
             stm.setString(1, p.getUniqueId().toString());
             stm.setString(2, p.getName());
             stm.setInt(3, Tags.member);
             stm.setInt(4, 0);
+            stm.setInt(5, 1);
             stm.executeUpdate();
             cs.sendMessage(CoreMethods.mysqlprefix + "Player §c" + p.getName() + " §7created with sucess.");
             CoreMethods.sendOwnerMSG(CoreMethods.mysqlprefix + "Player §c" + p.getName() + " §7created with sucess.");

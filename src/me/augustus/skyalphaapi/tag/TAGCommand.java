@@ -12,7 +12,6 @@ public class TAGCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String lb, String[] args) {
-        if (!(sender instanceof Player)) return true;
         Player p = (Player) sender;
 
         if (cmd.getName().equalsIgnoreCase("tag")) {

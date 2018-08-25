@@ -6,3 +6,6 @@ author: Augustus
 commands:
     logmode:
     mysql:
+    xp:
+    tag:
+    profile:

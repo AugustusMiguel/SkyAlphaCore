@@ -91,5 +91,35 @@ public class TAGMethods extends MySQLMethods {
 
     }
 
+    public static String getTagString(Player p) {
+        if (getTag(p) == Tags.owner) {
+            return "Owner";
+        }
+        if (getTag(p) == Tags.admin) {
+            return "Administrator";
+        }
+        if (getTag(p) == Tags.moderator) {
+            return "Moderator";
+        }
+
+        if (getTag(p) == Tags.vipplus) {
+            return "VIP+";
+        }
+
+        if (getTag(p) == Tags.vip) {
+            return "VIP";
+        }
+
+        if (getTag(p) == Tags.helper) {
+            return "Helper";
+        }
+
+        if (getTag(p) == Tags.member) {
+            return "Member";
+        }
+
+        return null;
+    }
+
 
 }
